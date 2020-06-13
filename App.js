@@ -1,83 +1,60 @@
-import React,{useState} from 'react';
-import { StyleSheet, Text, View, TextInput, Button } from 'react-native';
+import React, { useState } from "react";
+import { StyleSheet, Text, View, TextInput, Button, ScrollView } from "react-native";
 
 export default function App() {
-  const [enterGoal,setEnterGoal] = useState('');
-  const [goalList,setGoalList] = useState([])
-  const handleChangeText = (enteredText) =>{
-    setEnterGoal(enteredText)
-  }
-  const addGoalHandler = () =>{
-    setGoalList(goalList => [...goalList,enterGoal])
-    setEnterGoal('')
-  }
+  const [enterGoal, setEnterGoal] = useState("");
+  const [goalList, setGoalList] = useState([]);
+  const handleChangeText = (enteredText) => {
+    setEnterGoal(enteredText);
+  };
+  const addGoalHandler = () => {
+    setGoalList((goalList) => [...goalList, enterGoal]);
+    setEnterGoal("");
+  };
   return (
     <View style={styles.screen}>
       <View style={styles.inputContainer}>
-        <TextInput placeholder="Add Goales"
-         style={styles.input}
-         onChangeText={handleChangeText}
-         value={enterGoal} />
-        <Button title="Add" onPress={addGoalHandler}/>
+        <TextInput
+          placeholder="Add Goales"
+          style={styles.input}
+          onChangeText={handleChangeText}
+          value={enterGoal}
+        />
+        <Button title="Add" onPress={addGoalHandler} />
       </View>
+      <ScrollView>
+        {goalList.map((goal) => (
+          <View key={goal} style={styles.listItems}>
+            <Text>{goal}</Text>
+          </View>
+        ))}
+       </ScrollView>
       <View>
-      {goalList.map((goal) => <Text key={goal}>{goal}</Text>)}
+        <Text>I am testing scroll option</Text>
       </View>
-      <View
-      style={{
-        padding:20,
-        flexDirection: 'row',
-        width: '80%',
-        height: 300,
-        justifyContent: 'space-around',
-        alignItems: 'stretch',
-      }}
-    >
-      <View
-        style={{
-          backgroundColor: 'red',
-          flex: 1,
-          justifyContent: 'center',
-          alignItems: 'center'
-        }}
-      >
-        <Text>1</Text>
-      </View>
-      <View
-        style={{
-          backgroundColor: 'blue',
-          flex: 2,
-          justifyContent: 'center',
-          alignItems: 'center'
-        }}
-      >
-        <Text>2</Text>
-      </View>
-      <View
-        style={{
-          backgroundColor: 'green',
-          flex: 1,
-          justifyContent: 'space-evenly',
-          alignItems: 'flex-start'
-        }}
-      >
-        <Text>3</Text>
-        <Text>4</Text>
-        <Text>5</Text>
-      </View>
-    </View>
+     
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   screen: {
-    padding:50
+    padding: 50,
+    marginBottom:20
   },
   inputContainer: {
-  flexDirection : 'row', 
-  justifyContent:'space-between', 
-  alignContent:'center'},
-  input:{borderColor: 'black', borderWidth: 1, width:'80%'}
-  
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignContent: "center",
+    marginBottom:10
+  },
+  input: { borderColor: "black", borderWidth: 1, width: "80%" },
+  listItems:{
+    padding:5,
+    borderRadius: 4,
+    backgroundColor: '#ccc',
+    borderWidth:1,
+    borderColor:"black",
+    marginVertical: 5
+  }
 });
