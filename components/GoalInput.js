@@ -16,7 +16,7 @@ export default function GoalInput(props) {
         onChangeText={handleChangeText}
         value={enterGoal}
       />
-      <Button title="Add" onPress={() => props.addGoal(enterGoal,setEnterGoal)} />
+      <Button title="Add" onPress={props.addGoal.bind(this,enterGoal,setEnterGoal)} />
     </View>
   );
 }
