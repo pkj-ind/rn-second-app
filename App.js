@@ -1,17 +1,12 @@
 import React, { useState } from "react";
 import GoalItem from "./components/GoalItem";
 import GoalInput from "./components/GoalInput";
-import {
-  StyleSheet,
-  Text,
-  View,
-  FlatList,
-} from "react-native";
+import { StyleSheet, Text, View, FlatList } from "react-native";
 
 export default function App() {
   const [goalList, setGoalList] = useState([]);
 
-  const addGoalHandler = (enterGoal,setEnterGoal) => {
+  const addGoalHandler = (enterGoal, setEnterGoal) => {
     setGoalList((goalList) => [
       ...goalList,
       { id: Math.random().toString(), value: enterGoal },
@@ -25,7 +20,13 @@ export default function App() {
       <FlatList
         keyExtractor={(item, index) => item.id}
         data={goalList}
-        renderItem={(itemData) => <GoalItem title={itemData.item.value} />}
+        renderItem={(itemData) => (
+          <GoalItem
+            onDelete={() => console.log("it is touched")}
+            onLongPress={()=>console.log("I am long Presed")}
+            title={itemData.item.value}
+          />
+        )}
       />
 
       <View>
