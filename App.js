@@ -13,7 +13,13 @@ export default function App() {
     ]);
     setEnterGoal("");
   };
-  return (
+
+  const removeGoalHandler =(goalId) =>{
+    setGoalList((goalList)=>{
+      return goalList.filter((goal)=>goal.id !== goalId)
+    })
+  }
+  return (  
     <View style={styles.screen}>
       <GoalInput addGoal={addGoalHandler} />
 
@@ -22,7 +28,8 @@ export default function App() {
         data={goalList}
         renderItem={(itemData) => (
           <GoalItem
-            onDelete={() => console.log("it is touched")}
+            id={itemData.item.id}
+            onDelete={removeGoalHandler}
             onLongPress={()=>console.log("I am long Presed")}
             title={itemData.item.value}
           />
